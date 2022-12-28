@@ -1,0 +1,20 @@
+:global(body) {
+  // add font
+  height: 100vh;
+  background-color: var(--palette-color-2);
+}
+
+:global(#root) {
+  height: 100%;
+}
+
+:global(#loading) {
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}

@@ -1,9 +1,9 @@
-import { IUser } from '../models/IUser';
+import { IUser } from '../shared/interfaces/IUser';
 import { makeAutoObservable } from 'mobx';
-import AuthService from '../services/AuthService';
+import { default as authService } from '../shared/services/authService';
 import axios, { AxiosError } from 'axios';
-import { API_URL } from '../http';
-import { AuthResponse } from '../models/response/AuthResponse';
+import { API_URL } from '../shared/services/apiService';
+import { IAuthResponse } from '../shared/interfaces/IAuthResponse';
 
 class Store {
   user = {} as IUser;
@@ -28,9 +28,8 @@ class Store {
 
   async login(email: string, password: string) {
     try {
-      const response = await AuthService.login(email, password);
-      console.log(response);
-      localStorage.setItem('token', response.data.accessToken);
+      const response = await authService.login(email, password);
+      localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
@@ -44,10 +43,8 @@ class Store {
 
   async registration(email: string, password: string) {
     try {
-      console.log(email, password);
-      const response = await AuthService.registration(email, password);
-      console.log(response);
-      localStorage.setItem('token', response.data.accessToken);
+      const response = await authService.registration(email, password);
+      localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {
@@ -61,8 +58,8 @@ class Store {
 
   async logout() {
     try {
-      await AuthService.logout();
-      localStorage.removeItem('token');
+      await authService.logout();
+      localStorage.removeItem('accessToken');
       this.setAuth(false);
       this.setUser({} as IUser);
     } catch (e) {
@@ -77,11 +74,11 @@ class Store {
   async checkAuth() {
     this.setLoading(true);
     try {
-      const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+      const response = await axios.get<IAuthResponse>(`${API_URL}/refresh`, {
         withCredentials: true
       });
       console.log(response);
-      localStorage.setItem('token', response.data.accessToken);
+      localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
     } catch (e) {

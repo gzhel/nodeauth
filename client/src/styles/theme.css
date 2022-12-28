@@ -1,0 +1,16 @@
+:root {
+    --btn-color: #0079FF;
+    --btn-color-hover: #60ABFF;
+
+    --palette-color-1: #FFF;
+    --palette-color-2: #F6F8FF;
+    --palette-color-3: #697C9A;
+    --palette-color-4: #4B6A9B;
+    --palette-color-5: #2B3442;
+    --palette-color-6: #1E2A47;
+    --palette-color-7: #141D2F;
+
+    --error-color: #F74646;
+
+    --shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
+}
