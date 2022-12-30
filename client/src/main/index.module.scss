@@ -1,11 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
 :global(body) {
-  // add font
   height: 100vh;
-  background-color: var(--palette-color-2);
+  background-color: var(--bg-color);
+}
+
+:global(button) {
+  font-family: var(--font-family);
 }
 
 :global(#root) {
   height: 100%;
+  font-family: var(--font-family);
 }
 
 :global(#loading) {

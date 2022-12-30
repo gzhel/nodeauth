@@ -11,7 +11,7 @@ export interface IControlledInput {
 
 export const ControlledInput = (p: IControlledInput) => {
   return (
-    <span className={s.inputLayout}>
+    <div className={s.inputLayout}>
       <input
         className={s.input}
         onChange={p.onChange}
@@ -19,7 +19,9 @@ export const ControlledInput = (p: IControlledInput) => {
         type={p.type}
         placeholder={p.placeholder}
       />
-      {!p.validationMessage ? null : <p className={s.validationError}>{p.validationMessage}</p>}
-    </span>
+      {!p.validationMessage ? null : (
+        <span className={s.validationError}>{p.validationMessage}</span>
+      )}
+    </div>
   );
 };

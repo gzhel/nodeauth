@@ -1,6 +1,21 @@
 :root {
+    --font-family: 'Kanit', sans-serif;
+    --text-color: #000000;
+
     --btn-color: #0079FF;
     --btn-color-hover: #60ABFF;
+
+    --input-color: #EAEAEA;
+    --input-color-focused: #D7D7D7;
+
+    --header-color: #FFFFFF;
+    --bg-color: #EAEAEA;
+    --logo-color: #378FE9;
+
+    --error-color: #F74646;
+
+    --table-border-color: #0079FF;
+    --table-header-color: #FFFFFF;
 
     --palette-color-1: #FFF;
     --palette-color-2: #F6F8FF;
@@ -10,7 +25,6 @@
     --palette-color-6: #1E2A47;
     --palette-color-7: #141D2F;
 
-    --error-color: #F74646;
 
     --shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.2);
 }

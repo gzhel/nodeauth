@@ -11,16 +11,21 @@ export const Content = observer(() => {
   if (!m.isUserAuthorized) {
     return (
       <div className={s.content}>
-        <div className={s.authorizedUser}>To see the content of website, please, authorize</div>
+        <div className={s.authorizedUser}>
+          To use the site's features, please log in to your account.
+        </div>
+        <div className={classNames(s.authorizedUser, s.validationMessage)}>
+          {m.validationMessage}
+        </div>
       </div>
     );
   }
 
   return (
     <div className={s.content}>
-      <div className={s.authorizedUser}>You currently authorized as {m.store.user.email}</div>
+      <div className={s.authorizedUser}>You currently authorized as {m.store.user.email}.</div>
       {m.store.user.isActivated ? null : (
-        <div className={s.activateAccount}>Please, activate your account via mail we sent you</div>
+        <div className={s.authorizedUser}>Please, activate your account via mail we sent you.</div>
       )}
       <div className={s.users}>
         <ControlledButton value={'Get users'} onClick={m.getUsers} />

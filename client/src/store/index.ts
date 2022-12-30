@@ -4,11 +4,14 @@ import { default as authService } from '../shared/services/authService';
 import axios, { AxiosError } from 'axios';
 import { API_URL } from '../shared/services/apiService';
 import { IAuthResponse } from '../shared/interfaces/IAuthResponse';
+import { IValidationError } from '../shared/interfaces/IValidationError';
 
 class Store {
   user = {} as IUser;
   isAuthorized = false;
   isLoading = false;
+  errors = [] as IValidationError[];
+  validationMessage = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -26,6 +29,14 @@ class Store {
     this.isLoading = bool;
   }
 
+  setErrors(errors: IValidationError[]) {
+    this.errors = errors;
+  }
+
+  setValidationMessage(message: string) {
+    this.validationMessage = message;
+  }
+
   async login(email: string, password: string) {
     try {
       const response = await authService.login(email, password);
@@ -34,9 +45,13 @@ class Store {
       this.setUser(response.data.user);
     } catch (e) {
       if (e instanceof AxiosError) {
-        console.log(e.response?.data?.message);
+        if (e.response?.data?.errors.length) {
+          this.setErrors(e.response?.data?.errors);
+        } else {
+          this.setValidationMessage(e.response?.data?.message);
+        }
       } else {
-        console.log('Unexpected error');
+        this.setValidationMessage('Unexpected error');
       }
     }
   }
@@ -49,9 +64,13 @@ class Store {
       this.setUser(response.data.user);
     } catch (e) {
       if (e instanceof AxiosError) {
-        console.log(e.response?.data?.message);
+        if (e.response?.data?.errors.length) {
+          this.setErrors(e.response?.data?.errors);
+        } else {
+          this.setValidationMessage(e.response?.data?.message);
+        }
       } else {
-        console.log('Unexpected error');
+        this.setValidationMessage('Unexpected error');
       }
     }
   }

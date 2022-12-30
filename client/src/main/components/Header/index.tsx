@@ -4,13 +4,17 @@ import { ControlledInput } from './ControlledInput';
 import { ControlledButton } from './ControlledButton';
 import { observer } from 'mobx-react-lite';
 import { useModel } from './model';
+import { ReactComponent as Logo } from '../../../styles/logo.svg';
 
 export const Header: FC = observer(() => {
   const m = useModel();
 
   return (
     <div className={s.header}>
-      <div className={s.logo}>NodeAuth</div>
+      <div className={s.logo} onClick={m.handleLogoClicked}>
+        <span className={s.logoText}>NodeAuth</span>
+        <Logo width={32} height={32} />
+      </div>
       <div className={s.actions}>
         {!m.store.isAuthorized ? (
           <>
@@ -19,14 +23,14 @@ export const Header: FC = observer(() => {
               value={m.email}
               onChange={(event) => m.setEmail(event.target.value)}
               placeholder={'Email'}
-              validationMessage={null}
+              validationMessage={m.emailValidation || null}
             />
             <ControlledInput
               type={'password'}
               value={m.password}
               onChange={(event) => m.setPassword(event.target.value)}
               placeholder={'Password'}
-              validationMessage={null}
+              validationMessage={m.passwordValidation || null}
             />
             <div className={s.buttons}>
               <ControlledButton value={'Sign In'} onClick={m.handleLogin} />

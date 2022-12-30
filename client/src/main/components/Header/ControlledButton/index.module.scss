@@ -1,13 +1,16 @@
 .button {
   width: 100px;
-  padding: 5px 10px;
+  padding: 10px;
+  box-sizing: border-box;
   margin: 0 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: var(--btn-color);
+  background-color: transparent;
+  border: 1px solid var(--btn-color);
+  color: var(--btn-color);
+  line-height: 14px;
 
   &:hover {
-    background-color: var(--btn-color-hover);
+    border: 1px solid var(--btn-color-hover);
+    color: var(--btn-color-hover);
     cursor: pointer;
   }
 }
