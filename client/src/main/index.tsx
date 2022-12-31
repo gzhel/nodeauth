@@ -4,24 +4,34 @@ import { useModel } from './model';
 import s from './index.module.scss';
 import { Header } from './components/Header';
 import { Content } from './components/Content';
+import { createPortal } from 'react-dom';
 
 const App: FC = observer(() => {
   const m = useModel();
 
   // TODO:
-  //  1) Preloader
-  //  2) Bugfixes
   //  3) Deploy
   //  4) Portfolio
-
-  if (m.isAuthorizationLoading) {
-    // Add component of preloader using react portals
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className={s.app}>
       <Header />
+      {m.isLoading &&
+        m.preloaderElement &&
+        createPortal(
+          <div className={s.preloaderContent}>
+            <span
+              ref={m.preloaderTextElement}
+              style={{ color: m.preloaderColor }}
+              onClick={(event) => {
+                event.preventDefault();
+              }}
+            >
+              Loading...
+            </span>
+          </div>,
+          m.preloaderElement
+        )}
       <Content />
     </div>
   );

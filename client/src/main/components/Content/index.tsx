@@ -27,21 +27,23 @@ export const Content = observer(() => {
       {m.store.user.isActivated ? null : (
         <div className={s.authorizedUser}>Please, activate your account via mail we sent you.</div>
       )}
-      <div className={s.users}>
-        <ControlledButton value={'Get users'} onClick={m.getUsers} />
-        <div className={s.usersTable}>
-          <div className={classNames(s.usersTableHeader, s.usersTableRow)}>
-            <p>Email</p>
-            <p>Status</p>
-          </div>
-          {m.users.map((user, index) => (
-            <div key={`${user.email}-${index}`} className={s.usersTableRow}>
-              <p>{user.email}</p>
-              <p>{user.isActivated ? 'ACTIVATED' : 'NOT ACTIVATED'}</p>
+      {!m.store.user.isActivated ? null : (
+        <div className={s.users}>
+          <ControlledButton value={'Get users'} onClick={m.getUsers} />
+          <div className={s.usersTable}>
+            <div className={classNames(s.usersTableHeader, s.usersTableRow)}>
+              <p>Email</p>
+              <p>Status</p>
             </div>
-          ))}
+            {m.users.map((user, index) => (
+              <div key={`${user.email}-${index}`} className={s.usersTableRow}>
+                <p>{user.email}</p>
+                <p>{user.isActivated ? 'ACTIVATED' : 'NOT ACTIVATED'}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 });

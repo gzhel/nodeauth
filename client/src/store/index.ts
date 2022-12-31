@@ -38,6 +38,7 @@ class Store {
   }
 
   async login(email: string, password: string) {
+    this.setLoading(true);
     try {
       const response = await authService.login(email, password);
       localStorage.setItem('accessToken', response.data.accessToken);
@@ -54,9 +55,11 @@ class Store {
         this.setValidationMessage('Unexpected error');
       }
     }
+    this.setLoading(false);
   }
 
   async registration(email: string, password: string) {
+    this.setLoading(true);
     try {
       const response = await authService.registration(email, password);
       localStorage.setItem('accessToken', response.data.accessToken);
@@ -73,9 +76,11 @@ class Store {
         this.setValidationMessage('Unexpected error');
       }
     }
+    this.setLoading(false);
   }
 
   async logout() {
+    this.setLoading(true);
     try {
       await authService.logout();
       localStorage.removeItem('accessToken');
@@ -88,6 +93,7 @@ class Store {
         console.log('Unexpected error');
       }
     }
+    this.setLoading(false);
   }
 
   async checkAuth() {
