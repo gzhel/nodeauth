@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 
-export const API_URL = `https://nodeauth-server.onrender.com/api/refresh`;
+export const API_URL = `https://nodeauth-server.onrender.com/api`;
 
 const $api = axios.create({
   withCredentials: true, // automatically add cookies for queries
