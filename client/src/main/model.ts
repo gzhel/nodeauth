@@ -24,7 +24,11 @@ export const useModel = () => {
   }, [preloaderColor]);
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) store.checkAuth();
+    console.log('src/main/model.ts - useEffectCheck - 1', localStorage.getItem('accessToken'));
+    if (localStorage.getItem('accessToken')) {
+      console.log('src/main/model.ts - useEffectCheck - 1', localStorage.getItem('accessToken'));
+      store.checkAuth();
+    }
   }, [store]);
 
   return {
