@@ -92,10 +92,7 @@ class UserService {
 
   async refresh(refreshToken) {
     // If cookies have no refresh token, then user is not authorized
-    if (!refreshToken) {
-      console.log(444, !refreshToken);
-      throw ApiError.UnauthorizedError();
-    }
+    if (!refreshToken) throw ApiError.UnauthorizedError();
 
     // Validates that access token is correct
     const userData = tokenService.validateRefreshToken(refreshToken);
@@ -104,10 +101,7 @@ class UserService {
     const tokenFromDB = await tokenService.findToken(refreshToken);
 
     // If token is not correct and db have not this token, then user is unauthorized
-    if (!userData || !tokenFromDB) {
-      console.log(555, !userData, !tokenFromDB);
-      throw ApiError.UnauthorizedError();
-    }
+    if (!userData || !tokenFromDB) throw ApiError.UnauthorizedError();
 
     // Gets user from db by id
     const user = await userModel.findById(userData.id);

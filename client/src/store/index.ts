@@ -99,11 +99,9 @@ class Store {
   async checkAuth() {
     this.setLoading(true);
     try {
-      console.log('src/store/index.ts - checkAuth - 1');
       const response = await axios.get<IAuthResponse>(`${API_URL}/refresh`, {
         withCredentials: true
       });
-      console.log('src/store/index.ts - checkAuth - 2', response);
       localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);
