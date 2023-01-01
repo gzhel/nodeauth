@@ -9,10 +9,6 @@ import { createPortal } from 'react-dom';
 const App: FC = observer(() => {
   const m = useModel();
 
-  // TODO:
-  //  3) Deploy
-  //  4) Portfolio
-
   return (
     <div className={s.app}>
       <Header />

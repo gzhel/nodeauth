@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const router = require("./routes/index");
 const errorMiddleware = require("./shared/middlewares/errorMiddleware");
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000;
 
 const app = express();
 app.use(express.json());
