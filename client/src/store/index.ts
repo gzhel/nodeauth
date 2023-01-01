@@ -100,9 +100,12 @@ class Store {
     this.setLoading(true);
     try {
       console.log('src/store/index.ts - checkAuth - 1');
-      const response = await axios.get<IAuthResponse>(`${API_URL}/refresh`, {
-        withCredentials: true
-      });
+      const response = await axios.get<IAuthResponse>(
+        'https://nodeauth-server.onrender.com/api/refresh',
+        {
+          withCredentials: true
+        }
+      );
       console.log('src/store/index.ts - checkAuth - 2', response);
       localStorage.setItem('accessToken', response.data.accessToken);
       this.setAuth(true);
