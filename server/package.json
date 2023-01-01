@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "export NODE_ENV=test && nodemon index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],

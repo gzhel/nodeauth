@@ -2,6 +2,11 @@ const userService = require("../services/userService");
 const { validationResult } = require("express-validator");
 const ApiError = require("../../shared/errors/apiError");
 
+const CLIENT_URL =
+  process.env.NODE_ENV === "test"
+    ? process.env.LOCAL_CLIENT_URL
+    : process.env.CLIENT_URL;
+
 class UserController {
   async registration(req, res, next) {
     try {
@@ -30,7 +35,7 @@ class UserController {
 
       await userService.activate(activationLink);
 
-      return res.redirect(process.env.CLIENT_URL);
+      return res.redirect(CLIENT_URL);
     } catch (e) {
       next(e);
     }

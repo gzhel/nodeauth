@@ -6,6 +6,11 @@ const tokenService = require("./tokenService");
 const UserDTO = require("../../shared/dtos/userDTO");
 const ApiError = require("../../shared/errors/apiError");
 
+const API_URL =
+  process.env.NODE_ENV === "test"
+    ? process.env.LOCAL_API_URL
+    : process.env.LOCAL_API_URL;
+
 class UserService {
   async registration(email, password) {
     const isUserExists = await userModel.findOne({ email });
@@ -29,7 +34,7 @@ class UserService {
     // Send activation mail to registered user email
     await mailService.sendActivationMail(
       email,
-      `${process.env.API_URL}/api/activate/${activationLink}`
+      `${API_URL}/api/activate/${activationLink}`
     );
 
     // Creating user DTO (object) using user from db: id, email, isActivated

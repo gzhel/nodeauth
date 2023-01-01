@@ -1,5 +1,10 @@
 const nodemailer = require("nodemailer");
 
+const API_URL =
+  process.env.NODE_ENV === "test"
+    ? process.env.LOCAL_API_URL
+    : process.env.LOCAL_API_URL;
+
 class MailService {
   constructor() {
     this.transporter = nodemailer.createTransport({
@@ -17,7 +22,7 @@ class MailService {
     await this.transporter.sendMail({
       from: process.env.SMTP_USER,
       to,
-      subject: `NodeAuth. Account activation link for ${process.env.API_URl}`,
+      subject: `NodeAuth. Account activation link for ${API_URL}`,
       text: "",
       html: `
         <div>

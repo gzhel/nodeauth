@@ -6,7 +6,13 @@ const mongoose = require("mongoose");
 const router = require("./routes/index");
 const errorMiddleware = require("./shared/middlewares/errorMiddleware");
 
-const PORT = process.env.PORT || 10000;
+const PORT =
+  process.env.NODE_ENV === "test" ? process.env.LOCAL_PORT : process.env.PORT;
+
+const CLIENT_URL =
+  process.env.NODE_ENV === "test"
+    ? process.env.LOCAL_CLIENT_URL
+    : process.env.CLIENT_URL;
 
 const app = express();
 app.use(express.json());
@@ -14,7 +20,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: process.env.CLIENT_URL,
+    origin: CLIENT_URL,
   })
 );
 app.use("/api", router);

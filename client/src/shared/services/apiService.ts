@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { IAuthResponse } from '../interfaces/IAuthResponse';
 
-export const API_URL = `https://nodeauth-server.onrender.com/api`;
+console.log(process.env);
+
+export const API_URL =
+  process.env.REACT_APP_ENV === 'test'
+    ? 'http://localhost:4000/api'
+    : 'https://nodeauth-server.onrender.com/api';
 
 const $api = axios.create({
   withCredentials: true, // automatically add cookies for queries
